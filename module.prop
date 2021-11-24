@@ -1,6 +1,6 @@
 id=file-cleaner
 name=File Cleaner
-version=v1
-versionCode=20211123
+version=v2
+versionCode=20211124
 author=Zhezhe Peng
 description=Delete garbage files from the sdcard's root directory on a regular basis.

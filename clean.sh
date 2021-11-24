@@ -2,26 +2,22 @@
 MODDIR=${0%/*}
 LOGDIR=$MODDIR/logs
 
-while true
-do
-    if [[ -f $MODDIR/disable ]]; then
-        exit 1
-    fi
-    # Running the clean process only when the screen on.
-    if [[ $(dumpsys window policy | grep "mInputRestricted" | cut -d= -f2) == "true" ]]; then
-        sleep 15
-        continue
-    fi
+# Running the clean process only when the screen on.
+if [[ $(dumpsys window policy | grep "mInputRestricted" | cut -d= -f2) == "false" ]]; then
+    
     # Create the log folder
     if [[ ! -d $LOGDIR ]]; then
         mkdir -p $LOGDIR
     fi
+
     # Create the log file.
     if [[ ! -f $MODDIR/logs/$(date +%Y-%m-%d) ]]; then
         touch $MODDIR/logs/$(date +%Y-%m-%d)
     fi
+
     # Read config file
     source $MODDIR/files.conf
+   
     # Delete the files and folders in the configuration file. And wirte the deleted file or folder name to the log file.
     for i in $files
     do
@@ -33,5 +29,4 @@ do
             echo "$(date +%H:%M:%S):Delete file: $i" >> $MODDIR/logs/$(date +%Y-%m-%d)
         fi
     done
-    sleep 15
-done
+fi
