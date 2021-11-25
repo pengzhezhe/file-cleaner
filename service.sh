@@ -1,12 +1,6 @@
 #!/system/bin/sh
 
 MODDIR=${0%/*}
-MAGISK_TMP=$(magisk --path 2>/dev/null)
-[[ -z $MAGISK_TMP ]] && MAGISK_TMP="/sbin"
-
-alias crond="$MAGISK_TMP/.magisk/busybox/crond"
-chmod -R 0777 $MODDIR
-
 
 until [[ $(getprop sys.boot_completed) -eq 1 ]]
 do
